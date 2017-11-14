@@ -1,0 +1,28 @@
+package com.zzx.pojo;
+/**
+* @author 郑志欣
+* @date 2017年10月7日
+* 微信jsapi_ticket
+*/
+public class JsapiTicket {
+	private String ticket;
+	
+	private int expiresIn;
+
+	public String getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
+
+	public int getExpiresIn() {
+		return expiresIn;
+	}
+
+	public void setExpiresIn(int expiresIn) {
+		this.expiresIn = expiresIn;
+	}
+
+}

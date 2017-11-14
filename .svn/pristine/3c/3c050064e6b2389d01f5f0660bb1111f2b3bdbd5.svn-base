@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.Live.index.dao.SysLiveIndexDao">
+	<select id="count" resultType="int">
+		select count(account) from liveuser where account=#{account} and password=#{password}
+	</select>
+	
+	<select id="countNum" resultType="int">
+		select count(account) from liveuser where account=#{account}
+	</select>
+	
+	<select id="countName" resultType="int">
+		select count(name) from liveuser where name=#{name}
+	</select>
+	
+	<select id="check" resultType="int">
+		select state from liveuser where account=#{account}
+	</select>
+	
+	<select id="getDisable" resultType="int">
+		select disable from liveuser where account=#{account}
+	</select>
+	
+	<insert id="reg">
+		insert into liveuser (name,account,password,userid) values(#{name},#{account},#{password},#{userid})
+	</insert>
+	
+	<select id="getName" resultType="String">
+		select name from liveuser where account=#{account}
+	</select>
+	
+	<!-- 登入 -->
+	<update id="setLoginState">
+		update liveuser set state=0 where account=#{account}
+	</update>
+	
+	<!-- 登出 -->
+	<update id="logout">
+		update liveuser set state=1 where account=#{account}
+	</update>
+</mapper>

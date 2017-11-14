@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.live.message.dao.SysStockLiveMessageDao">
+	<insert id="saveMessage">
+		insert into live (content,state,time) values (#{content},#{state},now())
+	</insert>
+	
+	<update id="setStateBlue">
+		update live set
+			state=2
+		where id=#{id}	
+	</update>
+	
+	<select id="querySysStockLiveList" resultType="com.zzx.pojo.SysStockLive">
+		select * from live where 1=1
+			<if test="keyword != null and keyword != ''">
+	   			and live.content like concat(concat('%',#{keyword}),'%')
+	   		</if>
+	   		
+	   		order by live.time desc
+		limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="count" resultType="int">        
+		select count(content) from live where 1 = 1  
+	</select>
+	
+	<select id="getStateId" resultType="String">        
+		select id from live where state =#{state} 
+	</select>
+	
+	<delete id="delete">
+	   delete from live where id=#{id}
+	</delete>
+</mapper>

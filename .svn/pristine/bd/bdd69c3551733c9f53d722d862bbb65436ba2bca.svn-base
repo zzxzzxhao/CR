@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.Weixin.Util.dao.WeixinDao">
+	<select id="getAccessToken" resultType="com.zzx.pojo.AccessToken">
+		select * from accesstoken 
+	</select>
+	
+	<select id="getJsapiTicket" resultType="com.zzx.pojo.JsapiTicket">
+		select * from jsapiticket 
+	</select>
+	
+	<update id="setAccessToken" parameterType="com.zzx.pojo.AccessToken">
+		update accesstoken a set
+			a.token=#{accessToken.token},
+			a.expiresIn=#{accessToken.expiresIn}
+	</update>
+
+	<update id="setJsapiTicket" parameterType="com.zzx.pojo.JsapiTicket">
+		update jsapiticket a set
+			a.ticket=#{jsapiTicket.ticket},
+			a.expiresIn=#{jsapiTicket.expiresIn}
+	</update>
+</mapper>

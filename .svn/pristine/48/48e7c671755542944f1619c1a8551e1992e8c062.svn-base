@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../views/css/css.css">
+    <link rel="alternate icon" type="image/png" href="../../views/images/liveicon.jpg">
+	<script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.js"></script>
+	<script src="../../views/js/jquery.SuperSlide.2.1.1.js"></script>
+    <title>好策略直播</title>
+</head>
+<body style="font-family: 微软雅黑；">
+    <div class="black-wrap">
+
+    </div>
+    <div class="page">
+        <div class="top mb-28">
+            <div class="nav fl">
+                <ul>
+                    <li class="active" style="margin-left: 238px"><a href="javascript:;">直播首页</a></li>
+                    <li><a href="test.html" download="好策略直播.html">保存到桌面</a></li>
+                    <li><a id="class_btn">课程表</a></li>
+                    <li><a href="javascript:;" id="sort_btn">软件下载</a></li>
+                    <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=910969601&site=qq&menu=yes">客服咨询</a></li>
+                </ul>
+            </div>
+            <div class="user fr">
+                <span class="mr-32" id="user"></span>
+                <a class="login-btn"></a>
+                <a class="register-btn"></a>
+                <a class="logout-btn" onclick="logout()"style="display: none;"></a>
+            </div>
+        </div>
+
+        <div class="content mb-18">
+            <div class="fl">
+                <div class="video-wrap mb-18">
+                    <embed style="width: 100%;height: 100%;" align="middle"
+					wmode="opaque" type="application/x-shockwave-flash"
+					allowfullscreen="true" allowscriptaccess="never" quality="high"
+					src="http://c2.web.yystatic.com/r/rc/main/main/1/60/main.swf?type=yyscene&amp;topSid=72735456&amp;subSid=72735456">
+					</embed>
+                </div>
+                <div class="notice-wrap c-fff mb-18">
+                    <a href="javascript:;" class="notice-icon mr-10"></a>
+                    <span>公告：10月1日~10月7日停播，股市休市，敬请转告！</span>
+                </div>
+                <div class="banner-wrap">
+                    <div class="banner relative">
+                        <div class="hd">
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="bd">
+                            <ul>
+                                <li><a href="javasript:;"><img src="../../views/images/img/bg.jpg" alt="" /></a></li>
+                                <li><a href="javasript:;"><img src="../../views/images/img/bg.jpg" alt="" /></a></li>
+                                <li><a href="javasript:;"><img src="../../views/images/img/bg.jpg" alt="" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <script>jQuery(".banner").slide({mainCell:".bd ul",autoPlay:true,trigger:"click",interTime:2000}); </script> 
+                </div>
+            </div>
+            <div class="fr">
+                <div class="chat-wrap mb-18">
+                    <div class="control-wrap">
+                        <a  class="fl chat-btn chat-btn-active" id="chat_now" >讨论区</a>
+                        <a  class="fl chat-btn" id="chat_user">在线用户</a>
+                    </div>
+                    <div class="area-wrap">
+                        <ul id="saytext" name="saytext" style="">
+                        </ul>
+                    </div>
+                    <div class="user-wrap">
+                        <ul id="userlist">
+                        </ul>
+                    </div>
+                    <div class="tool-wrap">
+                         <a id="emotion" style="color: white;"><span class="tool-icon face"></span>表情</a>
+                         <a id="banners" style="color: white;"><span class="tool-icon gift"></span>彩条</a>
+                         <a id="cleanscreen" style="color: white;"><span class="tool-icon clear"></span>清屏</a>
+                    </div>
+                    <div class="text-wrap">
+                        <textarea class="text-area" name="" id="text_area" cols="30" rows="4" maxlength="20"></textarea>
+                        <a class="send" id="sendButton"></a>
+                    </div>
+                </div>
+                <div class="eq-wrap relative">
+                    <a href="javascript:;" class="eq-code"><a/>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span style="font-weight:bold">友情链接:</span>  
+            <a href="http://www.10jqka.com.cn/" target="_blank">同花顺</a>
+            <a href="http://finance.sina.com.cn/" target="_blank">新浪财经</a>
+            <a href="http://www.eastmoney.com/" target="_blank">东方财富</a>
+            <a href="http://money.163.com/" target="_blank">网易财经</a>
+            <a href="http://finance.qq.com/" target="_blank">腾讯财经</a>
+        </div>
+    </div>
+
+    <!-- 课程表弹窗 -->
+
+    <div class="classlist">
+
+    </div>
+
+    <!-- 软件下载弹窗 -->
+
+    <div class="sortlist">
+        
+    </div>
+
+    <!-- 提示弹窗 -->
+
+    <div class="tiplist">
+        
+    </div>
+
+    <!-- 登录界面 -->
+    <div class="gologin relative">
+        <div class="gologin-head">
+            <a class="fl gl-active light" id="lg_btn">登录</a>
+            <a class="fl light fuckbl" id="sign_btn">注册</a>
+        </div>
+        <div class="gologin-wrap">
+            <div id="userlogin" class="userlogin  mt-59">
+                <form class="text-center" id="login_form">
+                    <div class="ib">
+                        <div class="h-form">
+                            <label class="c-fff">手机号码：</label><input type="text" id="loginAccount" name="loginAccount" maxlength="11">
+                        </div>
+                        <div class="h-form">
+                            <label class="c-fff">登录密码：</label><input type="password" name="loginPassword" id="loginPassword" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="ib">
+                        <a id="loginButton" class="login-now"></a>
+                    </div>
+                </form>
+            </div>
+            <div id="usersign" class="usersign mt-12">
+                <form class="text-center" id="sign_form" name="sign_form" style="margin-top:129px;">
+                    <div class="ib">
+                        <div class="h-form">
+                            <label class="c-fff">您的昵称：</label><input type="text" id="registerName" name="registerName" maxlength="11">
+                        </div>
+                        <div class="h-form">
+                            <label class="c-fff">您的手机：</label><input type="text"id="registerAccount" name="registerAccount" maxlength="11">
+                        </div>
+                        <div class="h-form">
+                            <label class="c-fff">输入密码：</label><input type="password" name="registerPassword" id="registerPassword" maxlength="11">
+                        </div>
+                        <div class="h-form">
+                            <label class="c-fff">确认密码：</label><input type="password" id="replypassword" maxlength="11">
+                        </div>
+                        <div class="h-form">
+                            <a class="sign-now" id="registerButton"></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        console.log('v1.0')
+    })
+</script>
+
+<script> 
+    var WINDOW_HEIGHT = $(window).height();
+    $('.black-wrap').css('height',WINDOW_HEIGHT );
+
+    //控制显示隐藏区域
+    $('#chat_now').click(function(){
+        if(!$(this).hasClass('chat-btn-active')){
+            $('#chat_user').removeClass('chat-btn-active');
+            $(this).addClass('chat-btn-active');
+            $('.area-wrap').show();
+            $('.user-wrap').hide();
+        }
+    });
+    $('#chat_user').click(function(){
+        if(!$(this).hasClass('chat-btn-active')){
+            $('#chat_now').removeClass('chat-btn-active');
+            $(this).addClass('chat-btn-active');
+            $('.user-wrap').show().addClass('chat-btn-active');
+            $('.area-wrap').hide();
+        };
+        reloadUserlist();
+    });
+
+    $('#lg_btn').click(function(){
+        if(!$(this).hasClass('gl-active')){
+            $('#sign_btn').removeClass('gl-active');
+            $(this).removeClass('fuckbl');
+            $(this).addClass('gl-active');
+            $('#sign_btn').addClass('fuckbl');
+            $('.userlogin').show();
+            $('.usersign').hide();
+        }
+    });
+    $('#sign_btn').click(function(){
+        if(!$(this).hasClass('gl-active')){
+            $('#lg_btn').removeClass('gl-active');
+            $(this).removeClass('fuckbl');
+            $(this).addClass('gl-active');
+            $('#lg_btn').addClass('fuckbl');
+            $('.usersign').show();
+            $('.userlogin').hide();
+        }
+    });
+    
+
+    //弹窗控制
+    function showBlack(){
+        $('.black-wrap').toggle();
+    }
+    //提示信息，用于回调信息
+    function setTip(str){
+        $('.tiplist').html(str);
+    }
+    $('.black-wrap').click(function(){
+        $('.black-wrap').toggle();
+        $('.gologin,.classlist,.sortlist,.tiplist').hide();//每个弹窗都来这里销毁
+    })
+    $('.login-btn').click(function(){
+        showBlack();
+        $('.gologin').show();
+        if(!$('#lg_btn').hasClass('gl-active')){
+            $('#sign_btn').removeClass('gl-active');
+            $('#lg_btn').removeClass('fuckbl');
+            $('#lg_btn').addClass('gl-active');
+            $('#sign_btn').addClass('fuckbl');
+            $('.userlogin').show();
+            $('.usersign').hide();
+        }
+    })
+    $('.register-btn').click(function(){
+        showBlack();
+        $('.gologin').show();
+        if(!$('#sign_btn').hasClass('gl-active')){
+            $('#lg_btn').removeClass('gl-active');
+            $('#sign_btn').removeClass('fuckbl');
+            $('#sign_btn').addClass('gl-active');
+            $('#lg_btn').addClass('fuckbl');
+            $('.usersign').show();
+            $('.userlogin').hide();
+        }
+    })
+    $('#class_btn').click(function(){
+        $('.classlist').show();
+        showBlack();
+    })
+    $('#sort_btn').click(function(){
+        $('.sortlist').show();
+        showBlack();
+    })
+
+</script>
+<script type="text/javascript" src="../../views/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../views/js/base-config.js"></script>
+<script type="text/javascript" src="../../views/js/security.js"></script>
+<script src="index.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#emotion').qqFace({
+			id : 'facebox',
+			assign : 'text_area',
+			path : '../../views/emotion/' //表情存放的路径
+		});
+	});
+	
+	$(function() {
+		$('#banners').bannerGif({
+			id : 'bannersbox',
+			assign : 'text_area',
+			path : '../../views/banners/' //表情存放的路径
+		});
+	});
+</script>
+</html>

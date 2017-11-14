@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>盛峰网站后台管理系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+<link rel="stylesheet" type="text/css" href="../../views/css/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../views/css/icon.css">
+<link rel="stylesheet" type="text/css" href="../../views/css/common.css">
+<script type="text/javascript" src="../../views/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../views/js/jquery.form.js"></script>
+<script type="text/javascript" src="../../views/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../views/js/blockUI.js"></script>
+<script type="text/javascript" src="../../views/js/sysmsg.js"></script>
+<script type="text/javascript" src="../../views/js/uploadPreview.js"></script>
+<script type="text/javascript" src="../../views/js/base-config.js"></script>
+<script type="text/javascript" src="../../views/js/getPath.js"></script>
+<script type="text/javascript" src="../../views/js/security.js"></script>
+<script type="text/javascript" src="../../views/js/getImageInfo.js"></script>
+<script type="text/javascript" src="yylivemanage.js"></script>
+</head>
+<body>
+	<div class='topMask'
+		style="width: 100%; height: 100%; text-align: center; background-color: white; position: absolute; top: 0px; left: 0px; z-index: 9999999;">
+		<img style="width: 80px; height: 80px;"src="../../views/images/waiting.gif" />
+	</div>
+	<table id="tbLive" data-options="fit:true">
+	</table>
+	<div id="tb">
+		<table style="width: 904px;">
+			<tr>
+				<td style="width: 80px;">用户昵称查询</td>
+				<td style="width: 119px;"><input type="text" placeholder=""
+					style="width: 180px;" name="keyword" id="keyword" /></td>
+				<td>
+					<button id="doSearch" type="button" value="查询" data-oper="query">查询</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="7">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="Delete">删除</a>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="reset">重置密码</a> 
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="changeState">重置登录状态</a> 
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="enable">启用发言</a> 
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="disable">禁止发言</a> 
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="changeAddress">更改直播地址</a> 
+					<span style="font-size: 20px; float: right;">当前在线人数：<span id="onlineNum" style="font-size: 20px; color: red;"></span></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="easyui-window chgPwd" id="chgPwdWin" title="重置密码"
+		data-options="closed:true,collapsible:false,minimizable:false,maximizable:false,modal:true"
+		style="width: 200px; height: 200px;">
+		<div style="display: none" id="account"></div>
+		<div style="margin: 1px auto;">
+			<label>设置新密码：</label><input type="password" size="20" name="newPwd"
+				id="newPwd" class="easyui-validatebox"
+				data-options="required:true,validType:'pwd'" />
+		</div>
+		<div style="margin-top: 10px;">
+			<input type="button" value="提  交" id="savepwd" name="savepwd" />
+		</div>
+	</div>
+	
+	<div class="easyui-window" data-options="modal:true,closed:true,
+		resizable:false,
+		minimizable:false,
+		maximizable:false,
+		draggable:true,
+		collapsible:false"
+		id="addUserWin" name="addUserWin" style="width: 300px; height: 150px;">
+		<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data">
+			<div style="float: left; margin: 20px 0 0 20px; text-align: center;">
+					<div style="width: 250px; text-align: left; margin-top: 10px">
+						<span>直播地址:</span> <input id="address" name="address">
+					</div>
+				<div style="width: 250px; text-align: left; margin-top: 10px">
+					<input type="button" id="btnSave" name="btnSave" value="保 存" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="btnCancel"
+						name="btnCancel" value="取 消" />
+				</div>
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>

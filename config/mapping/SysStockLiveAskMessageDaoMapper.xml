@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.live.ask.message.dao.SysStockLiveAskMessageDao">
+	<update id="saveAskMessage">
+		update ask set
+			reply=#{reply},
+			replytime=now(),
+			name=#{name}
+			
+		where id=#{id}			
+	</update>
+	
+	<select id="querySysStockLiveAskList" resultType="com.zzx.pojo.SysStockLive">
+		select * from ask where 1=1
+			<if test="keyword != null and keyword != ''">
+	   			and ask.content like concat(concat('%',#{keyword}),'%')
+	   		</if>
+	   		
+	   		order by ask.time desc
+		limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="count" resultType="int">        
+		select count(content) from ask where 1 = 1  
+	</select>
+	
+	<delete id="delete">
+	   delete from ask where id=#{id}
+	</delete>
+</mapper>

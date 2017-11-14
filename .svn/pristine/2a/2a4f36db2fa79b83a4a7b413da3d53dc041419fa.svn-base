@@ -1,0 +1,236 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>草根达人</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../views/css/amazeui.min.css">
+    <style type="text/css">
+    	#menu li{
+    		text-align: center;
+    	}
+    	.pic{
+    		margin-top: 13px;
+    		width: 50%;
+    	}
+    	.am-btn{
+    		font-size:25px;
+    	}
+    	.test{
+    		display:-webkit-flex;
+			display: flex;
+			-webkit-align-items:center;
+			align-items:center;
+			-webkit-justify-content: center;
+			justify-content: center;
+    	}
+    </style>
+</head>
+<body>
+<div style="background-color: red;">
+	<div class="m-home-box" style="padding-bottom: 1px">
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default news am-no-layout" style="margin: 0px">
+			<div class="am-list-news-bd">
+				<ul class="am-list" id="menu" style="height: 60px">
+					<li class="am-g am-list-item-desced" style="background-color: red;border: 1px solid red;height: 88px;font-size: 31px">
+						<div class="test"style="margin-top: 8px">
+						<div class="am-u-sm-3" style="color: white;">明星</div>
+						<div class="am-u-sm-2" style="color: white;">股票</div>
+						<div class="am-u-sm-2" style="color: white;">持股时长</div>
+						<div class="am-u-sm-2" style="color: white;">累计涨幅</div>
+						<div class="am-u-sm-2"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="background-color: rgba(45, 40, 40, 0.02)">
+	<div class="m-home-box">
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default news am-no-layout">
+			<div class="am-list-news-bd">
+				<ul class="am-list" id="menu">
+					<!-- 第一支股票 -->
+					<li class="am-g">
+						<div class="test" style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url0" class="pic">
+							<div id="starname0"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<div class="center">
+								<h1 class="am-list-item-hd am-text-danger" id="name0" style="font-size: 31px"></h1>
+								<div id="code0"style="font-size: 34px;"></div>
+							</div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day0"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate0" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu0">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+					<!-- 第二支股票 -->
+					<li class="am-g">
+						<div class="test"style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url1"class="pic">
+							<div id="starname1"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<h1 class="am-list-item-hd am-text-danger" id="name1"style="font-size: 31px"></h1>
+							<div id="code1"style="font-size: 34px;"></div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day1"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate1" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu1">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+					<!-- 第三支股票 -->
+					<li class="am-g">
+					<div class="test"style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url2"class="pic">
+							<div id="starname2"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<h1 class="am-list-item-hd am-text-danger" id="name2"style="font-size: 31px"></h1>
+							<div id="code2"style="font-size: 34px;"></div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day2"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate2" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu2">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+					<!-- 第四支股票 -->
+					<li class="am-g">
+						<div class="test"style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url3"class="pic">
+							<div id="starname3"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<h1 class="am-list-item-hd am-text-danger" id="name3"style="font-size: 31px"></h1>
+							<div id="code3"style="font-size: 34px;"></div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day3"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate3" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu3">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+					<!-- 第五支股票 -->
+					<li class="am-g">
+					<div class="test"style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url4"class="pic">
+							<div id="starname4"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<h1 class="am-list-item-hd am-text-danger" id="name4"style="font-size: 31px"></h1>
+							<div id="code4"style="font-size: 34px;"></div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day4"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate4" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu4">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+					<!-- 第六支股票 -->
+					<li class="am-g">
+					<div class="test"style="height: 200px;">
+						<div class="am-u-sm-3">
+							<img id="url5"class="pic">
+							<div id="starname5"style="font-size: 30px;"></div>
+						</div>
+						<div class="am-u-sm-2">
+							<h1 class="am-list-item-hd am-text-danger" id="name5"style="font-size: 31px"></h1>
+							<div id="code5"style="font-size: 34px;"></div>
+						</div>
+						<div class="am-u-sm-2"style="font-size: 34px">
+							<div class="day"><span id="day5"></span>日</div>
+						</div>
+						<div class="am-u-sm-2">
+							<span id="rate5" class="up" style="font-size: 34px;"></span>
+						</div>
+						
+						<div class="am-u-sm-2">
+							<div class="up">
+								<button class="am-btn am-btn-danger am-round" onclick="more(this)" id="bu5">
+ 									<i class="am-icon-hand-o-right"></i>查看详情
+								</button>
+							</div>
+						</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../../views/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../views/js/base-config.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

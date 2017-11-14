@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>盛峰网站后台管理系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="pragma" content="no-cache"> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+	<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+	<link rel="stylesheet" type="text/css" href="views/css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="views/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="views/css/common.css">
+	<link rel="stylesheet" type="text/css" href="views/css/login/login.css">
+	<script type="text/javascript" src="views/js/base-config.js"></script>
+	<script type="text/javascript" src="views/js/sysmsg.js"></script>
+	<script type="text/javascript" src="views/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="views/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="views/js/security.js"></script>
+	<script type="text/javascript" src="views/js/login/login.js"></script>
+</head>
+<body onkeyup="onKey();">
+	<div class="titlename">盛峰网站后台管理系统</div>
+	<div class="login_area">
+	 	<form id="ff1" name="ff1" method="post">
+		 	<div class="box" id="from-name">
+				<input type="text" placeholder="请输入用户名" name="userid" id="userid"  autocomplete="off"  class="easyui-validatebox inputText" value="" data-options="required:true"/><br/>
+		 	</div>
+		 	<div class="box" id="from-pwd">
+				<input type="password" placeholder="请输入密码" name="password" id="password" class="easyui-validatebox inputText" value='' data-options="required:true"/><br/>
+		 	</div>
+		 	<div class="verify_area">	 		
+		 		<img class="verifyimg" src=""/>
+		 		<input type="text" value="" class="easyui-validatebox imgcode" name="imgcode" id="imgcode" maxlength="4"/>
+		 		<div onclick="myReload(event)" class="tip"> 看不清,换一个</div>
+		 	</div>
+		 	<div class="submit">
+				<input type='button' name='t55' class="btn loginbtn" value=''  onclick="login(event);void(0);" />
+		 	</div>
+		</form>
+	</div>
+</body>
+</html>

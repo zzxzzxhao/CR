@@ -1,0 +1,18 @@
+$(document).ready(function(){
+	$("#img1").mousedown(function(){
+		$("#img1").hide();
+		$("#img2").show();
+	});
+	$("#img2").click(function(){
+		$("#img2").hide();
+		$("#img3").show();
+	});
+	$("#img3").click(function(){
+		$("#img3").hide();
+		$("#img4").show();
+	});
+	$("#img4").click(function(){
+		$("#img4").hide();
+		$("#img1").show();
+	});
+});

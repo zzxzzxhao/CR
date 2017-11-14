@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>详情</title>
+    <link href="index.css" rel="stylesheet">
+    <style type="text/css">
+    .img{
+			display: none;
+			position:fixed;
+			top:20%;
+			left:18%;
+			width:62%;
+			z-index: 1;
+		}
+    </style>
+</head>
+<body>
+	<img class="img" id="tongbao" src="../../views/images/erweima.jpg">
+	<img class="img" id="others" src="../../views/images/others.jpg">
+	<div class="info_touxian">
+		<img class="info_touxianicon" id="url">
+		<div class="info_touxian_txt">
+			<label id="starname"></label>
+			<a href="###" class="info_touxian_btn"onclick="ask()"></a>
+		</div>
+	</div>
+	<div class="info_cont">
+		<div class="info_cont_one">
+			<img src="../../views/images/new_info_icon_11.png" >
+			<p id="sign"></p>
+		</div>
+		<div class="info_cont_one info_cont_two">
+			<img src="../../views/images/new_info_icon_14.png">
+			<p>股票名称：<span id="name"></span></p>
+			<p>股票代码：<span id="code"></span></p>
+			<p>购买价格：<span id="buyPrice"></span></p>
+			<p>现在价格：<span id="nowPrice"></span></p>
+			<p>累计涨幅：<span id="rate"></span></p>
+			<p>目标价位：<span id="target"></span></p>
+			<p>购买日期：<span id="date"></span></p>
+		</div>
+		<div class="info_cont_one info_cont_three">
+			<img src="../../views/images/new_info_icon_17.png">
+			<p><span id="dotime" style="color: black;"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="doname"></span>&nbsp;&nbsp;&nbsp;&nbsp;  收益 ：<span id="dorate"></span></p>
+		</div>
+		<p class="footer_txt">
+			声明：  “草根达人”个股信息并非推荐买卖依据；</br>股市有风险，投资需谨慎；
+		</p>
+	</div>	
+</body>
+<script src="../../views/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../views/js/base-config.js"></script>
+<script type="text/javascript" src="testmore.js" ></script>
+</html>

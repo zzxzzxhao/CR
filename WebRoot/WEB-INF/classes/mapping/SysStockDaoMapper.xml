@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.staffmanage.stock.dao.SysStockDao">
+	<select id="queryStockList" resultType="com.zzx.pojo.SysStock">        
+		select * from stocklist
+			<if test="keyword != null and keyword != ''">
+	   			and stocklist.name  like concat(concat('%',#{keyword}),'%')  
+	   		</if>
+			limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="count" resultType="int">        
+		select count(stockid) from stocklist  
+	</select>
+	
+	<select id="getStaffName" resultType="String">        
+		select staffname from staff where staffid=#{staffid}
+	</select>
+	
+	
+	<select id="findTopMenu" resultType="com.zzx.pojo.SysStaff">
+		select * from staff
+	</select>
+	
+	<update id="updateStock" parameterType="com.zzx.pojo.SysStock">
+		<if test="sysStock != null and sysStock.stockid!=null and sysStock.stockid!=''">
+			update stocklist a set
+		 		a.staffid=#{sysStock.staffid},
+		 		a.name=#{sysStock.name},
+		 		a.code=#{sysStock.code},
+		 		a.stocknum=#{sysStock.stocknum},
+		 		a.buyPrice=#{sysStock.buyPrice},
+		 		a.buyTime=#{sysStock.buyTime},
+		 		a.target=#{sysStock.target},
+		 		a.disable=#{sysStock.disable},
+		 		a.takeprofit=#{sysStock.takeprofit},
+				a.stoploss=#{sysStock.stoploss},
+				a.sellPrice=#{sysStock.sellPrice},
+		 		a.sellTime=#{sysStock.sellTime}
+		 			
+		 		where a.stockid=#{sysStock.stockid}
+		</if>
+	</update>
+	
+	<insert id="saveStock" parameterType="com.zzx.pojo.SysStock">
+		insert into stocklist
+			(staffid,
+			 name,
+			 code,
+			 stocknum,
+			 buyPrice,
+			 buyTime,
+			 target,
+			 takeprofit,
+			 stoploss,
+			 sellPrice,
+			 disable,
+			 sellTime)
+		values
+			(#{sysStock.staffid},
+			#{sysStock.name},
+			#{sysStock.code},
+			#{sysStock.stocknum},
+			#{sysStock.buyPrice},
+			#{sysStock.buyTime},
+			#{sysStock.target},
+			#{sysStock.takeprofit},
+			#{sysStock.stoploss},
+			#{sysStock.sellPrice},
+			#{sysStock.disable},
+			#{sysStock.sellTime})
+	</insert>
+	
+	<delete id="deleteStock" parameterType="String">
+        delete from stock where stockid=#{stockid}
+    </delete>
+</mapper>

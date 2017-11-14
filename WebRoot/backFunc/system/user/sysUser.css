@@ -1,0 +1,218 @@
+body {
+    font-family:"Microsoft YaHei",Helvetica,Verdana,Arial,Tahoma;
+    /*padding:20px;*/
+    font-size:12px;
+    margin:0;
+    word-wrap:break-word;
+    word-break:break-all;
+}
+body{
+	font-size:12pt;
+}
+.wrapperTable
+{
+	display: block;
+}
+
+.wrapperAddPanel
+{
+	width:500px;
+	height:450px;
+}
+.moduleListItem
+{
+	display: inline;
+	display:inline-blocok;
+	width:100px;
+
+}
+.createRole
+{
+	display: block;
+}
+ul.module_root
+{
+
+}
+ul.funcid_holder{
+	display:inline-block;
+	width:100%;
+	height:auto;
+	position:absolute;
+	z-index:11;
+}
+ul.module_root li
+{
+	text-decoration: none;
+	list-style: none;
+	width:100%;
+}
+.func_name{
+	display:block;
+	font-size:1.2em;
+	width:200px;
+}
+.funcid_name{
+	cursor:pointer;
+}
+ul.funcid_holder li{
+	width:150px;
+	text-decoration: none;
+	list-style: none;
+}
+.funciddiv{
+	width:200px;height:300px;overflow:scroll;position:relative;
+	border-left:solid 1px #fefefe;padding-bottom:4px;padding-top:4px;text-align:left;
+}
+.functree{
+	width:200px;vertical-align:top;height:300px;overflow:scroll;
+	border-right:solid 1px #aeaeae;padding-bottom:4px;padding-top:4px;
+}
+.wrapperMapPanel
+{
+	display: block;
+}
+.wrapperMapPanel a.saveMapping
+{	
+	padding-left:5px;	
+}
+
+.mapRoleModule
+{
+	width:500px;
+	position:relative;
+	display: block;
+	margin:0px auto;
+}
+.wrapperRoleUser
+{
+	width:650px;
+	position: relative;
+}
+.user_root_panel
+{
+	float:left;
+	width:225px; 
+	position: relative;
+}
+.user_root
+{	
+	width:220px; 
+	font-size: 14pt;
+	border:solid 1px black;
+	display:block;
+	height:250px;	
+	overflow:auto;	
+}
+.user_root .uItem
+{
+	width:190px;
+	border: inset 1px silver;
+	padding:2px;
+	margin:2px;	
+}
+body .uItem
+{
+	width:190px;
+	border: inset 1px silver;
+	padding:2px;
+	margin:2px;	
+}
+.userRole_root_panel
+{
+	float:left;
+	margin-left:20px;
+	width:230px; 
+}
+.userRole_root
+{
+	width:230px; 
+	font-size: 14pt;
+	border:solid 1px black;
+	display:block;
+	height:250px;
+	overflow: scroll;
+}
+.addeduser
+{
+	position:relative;
+	display:block;
+	width:200px;
+	height:20px;
+	line-height: 20px;
+	font-size: 14pt;
+	border:solid 1px black;
+	padding:2px;
+	margin:2px;
+}
+.nameHolder
+{	
+}
+.rmUser
+{
+	width:17px;
+	height:17px;
+	position: absolute;
+	right:0px;
+	top:0px;
+	cursor:pointer;
+	color: red;
+}
+.mapRoleWin
+{
+
+}
+.mapRoleWin .roleHolder
+{
+	width:400px;
+	height:320px;
+	overflow: auto;
+}
+.mapRoleWin .roleHolder .roleListItem
+{
+	width: 150px;
+	padding:5px;
+	font-size:0.9em;
+	float: left;
+}
+
+.mapRoleWin .roleHolder1
+{
+	width:400px;
+	height:320px;
+	overflow: auto;
+}
+.mapRoleWin .roleHolder1 .roleListItem
+{
+	width: 150px;
+	padding:5px;
+	font-size:0.9em;
+	float: left;
+}
+
+
+.editFormDiv
+{
+	width:480px;
+	height:360px;
+}
+.inputConf
+{
+	width:350px;
+}
+.textAreaConf
+{
+	width:350px;
+	height:60px;
+}
+#doSearch
+{
+	display:inline-block;
+	width:50px;
+	height:23px;
+	border:solid 1px #bbbbbb;
+	background:#cccccc;
+}
+#doSearch:hover{
+	background:#eeeeee;
+}

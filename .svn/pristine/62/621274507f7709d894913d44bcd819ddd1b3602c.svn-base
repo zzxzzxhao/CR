@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>盛峰网站后台管理系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+<link rel="stylesheet" type="text/css" href="views/css/easyui.css">
+<link rel="stylesheet" type="text/css" href="views/css/icon.css">
+<link rel="stylesheet" type="text/css" href="views/css/common.css">
+<script type="text/javascript" src="views/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="views/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="views/js/base-config.js?v=2"></script>
+<script type="text/javascript" src="views/js/md5.js"></script>
+<style type="text/css">
+body {
+	min-width: 1024px;
+}
+
+.overlength {
+	position: absolute;
+	right: 0px;
+}
+
+.west_header {
+	background: #e6e6e6;
+	font-family: 雅黑;
+	font-size: 15px;
+	color: #1e1e1e;
+	border-style: groove;
+}
+
+.west_header * {
+	background: #e6e6e6;
+	color: #1e1e1e;
+	font-size: 15px;
+	font-family: 雅黑;
+	border-style: groove;
+}
+
+.accordion .accordion-header {
+	background: #DFF3FF;
+}
+
+.layout-split-west {
+	border-right: 5px solid #DFF3FF;
+}
+
+.tabs li a.tabs-inner {
+	background: #e6e6e6;
+}
+
+.backSysBtn {
+	background-color: #034566;
+	position: absolute;
+	width: 80px;
+	bottom: 4px;
+	right: 20px;
+	color: white;
+	font-size: 16px;
+	border: solid 1px white;
+	background-position: left;
+	border-radius: 5px;
+	border: outset 1px;
+	padding: 5px;
+}
+
+.backSysBtn:hover {
+	border: inset 1px;
+}
+
+.globalMsg {
+	position: absolute;
+	color: Red;
+	z-index: 9999;
+	text-align: center;
+	line-height: 27px;
+	font-size: 15pt;
+	font-weight: bold;
+	padding: 2px;
+	display: none;
+	width: 100%;
+	height: 25px;
+	left: 0px;
+	top: 0px;
+	background: #b7deed;
+	opacity: 0.8;
+}
+
+div#srvacct {
+	font-size: 14px;
+	vertical-align: middle;
+	height: 25px;
+	line-height: 25px;
+}
+
+div#srvacct label {
+	font-size: 14px;
+}
+
+.srvlabel {
+	color: white;
+}
+
+.srvacct {
+	display: inline-block;
+	position: absolute;
+	left: 42px;
+	top: 63px;
+	height: 27px;
+	line-height: 20px;
+	display: block;
+	color: white;
+	font-size: 14px;
+}
+
+.srvacct * {
+	font-size: 14px;
+}
+
+#roles {
+	
+}
+/* 这里是tab的边框颜色 */
+.tabs-header,.tabs-scroller-left,.tabs-scroller-right,.tabs-tool,.tabs,.tabs-panels,.tabs li a.tabs-inner,.tabs li.tabs-selected a.tabs-inner,.tabs-header-bottom .tabs li.tabs-selected a.tabs-inner,.tabs-header-left .tabs li.tabs-selected a.tabs-inner,.tabs-header-right .tabs li.tabs-selected a.tabs-inner
+	{
+	border-color: #b9b9b9;
+}
+
+.icon-close {
+	background: url('views/images/arrow_close.png') no-repeat center center;
+}
+/*菜单*/
+.tree-file {
+	background: url('views/images/tree_icons.png') no-repeat -240px 0;
+}
+</style>
+</head>
+<body class="easyui-layout" style="background:#e6e6e6">
+	<div data-options="region:'north'"
+		style='position:relative;height:60px;border-style:solid;border-color:white white white white;background-color: white;'>
+		<table style="border:0px">
+			<tr align="right">
+				<td><font style="font-family:黑体;font-size:24px;"
+					color="#3b3b3b"> 盛峰网站后台管理系统</font></td>
+				<div style="position: absolute; right:15px; bottom: 2px; ">
+					<span style="font-size:small;color:black;"><img
+						src="views/images/login-name.png"
+						style="height: 20px; width: 20px; "> 用户：<span id="user"
+						style="text-decoration:underline;"></span>，欢迎使用。</span>&nbsp&nbsp&nbsp&nbsp
+					<a href="javascript:logout();" menu="#layout_north_zxMenu" id="btn"
+						class="easyui-linkbutton"
+						data-options="plain:true,iconCls:'icon-no'"><font
+						color="black" style="font-size:small;">退出系统</font></a>
+				</div>
+			</tr>
+		</table>
+	</div>
+	<div region="south" split="false"
+		style="height:34px;background:#b9b9b9;line-height:32px;border-style:solid;border-color:white white white white"
+		align="center">版权归 郑志欣biubiu 所有 © 2016-2017</div>
+	<div id="leftTreeNote"
+		data-options="region:'west',headerCls:'west_header;collapsible:false; '"
+		style="width:188px;background-image:url(views/images/menubackimg.png);border-style:solid;border-color:white white white white">
+		<div
+			style="font-family:雅黑;font-size:15px;background:#e6e6e6;color:#1e1e1e;height:30px;line-height:32px; ">&nbsp;&nbsp;&nbsp;&nbsp;功能菜单</div>
+		<ul class=" mainmenu easyui-tree" data-options="fit:true,border:false">
+		</ul>
+	</div>
+
+	<div data-options="region:'center'"
+		style="border-style:solid;border-color:white white white #b9b9b9;border-left-width:3px">
+		<div id="mainregion" data-options="fit:true,border:false,plain:true"
+			style="background:#e6e6e6;">
+			<div title="欢迎" data-options="href:'_content.html'" style="background-color: white;"></div>
+		</div>
+	</div>
+
+	<div id='globalMsg' class='globalMsg panel-header'>
+		<div id="textHolder" class="textHolder"></div>
+	</div>
+	<div id="popDetail" class="easyui-window" style="text-align:center;"
+		data-options="closed:true,modal:true,resizable:false,draggable:false,collapsible:false,minimizable:false">
+		<div id="contentDiv"></div>
+	</div>
+
+</body>
+<script type="text/html" id="tmplMenu">
+<div title="{name}" style="padding:2px;">
+</div>
+</script>
+<script type="text/html" id="tmplMenuItem">
+<div class="menu_item menu_platform" data-func="{key}" data-title="{name}">
+{name}
+</div>
+</script>
+<script type="text/javascript" src="views/js/login/index.js">
+	
+</script>
+</html>

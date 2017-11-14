@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.Home.liveask.dao.SysStockLiveAskDao">
+	<select id="getList" resultType="com.zzx.pojo.SysStockLive">
+		select * from ask order by time desc
+	</select>
+	
+	<insert id="saveMessage">
+		insert into ask (content,time) values (#{content},now())
+	</insert>
+</mapper>

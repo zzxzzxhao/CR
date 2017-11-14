@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.yylive.control.dao.SysYYLiveManageDao">
+	<select id="getLiveUser" resultType="com.zzx.pojo.SysYYLiveUser">
+		select * from liveuser where 1=1
+			<if test="keyword != null and keyword != ''">
+	   			and liveuser.name like concat(concat('%',#{keyword}),'%')
+	   		</if>
+		limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="count" resultType="int">        
+		select count(userid) from liveuser where 1 = 1  
+	</select>
+
+	<update id="updateState">
+		update liveuser set state=1 where account=#{account}
+	</update>
+	
+	
+	<delete id="delete">
+	   delete from liveuser where userid=#{id}
+	</delete>
+	
+	<update id="saveEnable">
+		update liveuser set
+			disable=0
+		where account=#{account}	
+	</update>
+	
+	<update id="saveDisable">
+		update liveuser set
+			disable=1
+		where account=#{account}	
+	</update>
+	
+	<update id="updatePassword">
+		update liveuser set
+			password=#{password}
+		where account=#{account}	
+	</update>
+	
+</mapper>

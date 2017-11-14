@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.sysuser.menu.dao.SysMenuDao">
+	
+	<select id="querySysMentList" parameterType="String" resultType="com.zzx.pojo.SysMenu">
+	   SELECT a.MENUID menuid, a.MENUITEM menuitem , a.URL url, a.PARENTID parentid, b.MENUITEM parentItem ,a.SORT sort 
+				from MENU a LEFT JOIN MENU b ON a.PARENTID = b.MENUID
+				where a.MENUID !='00000000000000000000000000000000' and a.state = 1 
+				<if test="menuid != null and menuid != ''">
+					and a.menuid = #{menuid} 
+				</if> 
+				<if test="menuitem != null and menuitem != ''">
+					and a.menuitem  like concat(concat('%',#{menuitem}),'%')  
+				</if> 
+				<if test="url != null and url != ''">
+					and a.url  like concat(concat('%',#{url}),'%')  
+				</if>
+				order by a.sort
+		limit #{start_number},#{page_size}
+	</select>
+
+	<select id="countAll"  parameterType="String" resultType="int">
+		 select count(1) from MENU a LEFT JOIN MENU b ON a.PARENTID = b.MENUID
+				where a.MENUID !='00000000000000000000000000000000' and a.state = 1
+				<if test="menuid != null and menuid != ''">
+					and a.menuid = #{menuid} 
+				</if> 
+				<if test="menuitem != null and menuitem != ''">
+					and a.menuitem like concat(concat('%',#{menuitem}),'%')  
+				</if> 
+				<if test="url != null and url != ''">
+					and a.url  like concat(concat('%',#{url}),'%')  
+				</if>
+	</select>
+    <delete id="deleteMenu" parameterType="String">
+        delete from MENU where menuid=#{menuid}
+    </delete>
+	
+	<select id="countAllFunsByMenuid"  parameterType="String" resultType="int">
+		 select count(1) from func t where t.menuid=#{menuid}
+	</select>
+	
+	<select id="countAllChildrenMenu"  parameterType="String" resultType="int">
+		 select count(1) from MENU a where a.PARENTID = #{menuid} and a.state = 1
+	</select>
+	
+	<select id="findTopMenu" resultType="com.zzx.pojo.SysMenu">
+		select * from MENU a order by a.sort asc
+	</select>
+	
+	<select id="getMenuCountByMenuitem"  parameterType="String" resultType="int">
+		 select count(1) from menu where menuitem=#{menuitem} and state = 1
+	</select>
+	
+	<!-- 保存一条数据，List传参 -->
+	<insert id="saveMenu" parameterType="com.zzx.pojo.SysMenu">
+		
+        insert into menu
+          (menuid,
+           parentid,
+           menuitem,
+           url,
+           sort,
+           state)
+        values
+          (#{sysMenu.menuid},
+           #{sysMenu.parentid },
+           #{sysMenu.menuitem :VARCHAR},
+           #{sysMenu.url :VARCHAR},
+           #{sysMenu.sort },
+           #{sysMenu.state })
+	</insert>
+	
+	<insert id="updateMenu" parameterType="com.zzx.pojo.SysMenu">
+       <if test="sysMenu != null and sysMenu.menuid!=null and sysMenu.menuid!=''">
+       		update menu m 
+       			set m.url=#{sysMenu.url :VARCHAR},  
+       				m.parentid=#{sysMenu.parentid }, 
+       				m.menuitem=#{sysMenu.menuitem: VARCHAR}, 
+       				m.sort=#{sysMenu.sort}
+       			where 	m.menuid=#{sysMenu.menuid}
+       </if>
+	</insert>
+	
+	<select id="querySysFuncList" parameterType="String" resultType="com.zzx.pojo.SysFunc">
+	   	select distinct a.id id,a.url url ,a.name name,operate.opername opername,
+						operate.operid operid,
+						menu.menuitem menuitem,
+						menu.menuid,
+						func.funcid funcid
+						from url a,
+						func_url b,
+						func ,
+						menu,
+						operate
+						
+						where 
+						a.id=b.urlid 
+						and func.funcid = b.funcid 
+						and func.menuid = menu.menuid
+						and func.operid = operate.operid
+						and menu.state = 1
+						
+						<if test="menuid != null and menuid != ''">
+							and a.id = #{menuid} 
+						</if> 
+						<if test="menuitem != null and menuitem != ''">
+							and a.name  like concat(concat('%',#{menuitem}),'%')  
+						</if> 
+						<if test="url != null and url != ''">
+							and a.url  like concat(concat('%',#{url}),'%')  
+						</if> 
+						<if test="name != null and name != ''">
+							and menu.menuid = #{name} 
+						</if> 
+						
+						order by menu.menuitem
+			limit #{start_number},#{page_size} 
+	</select>
+	
+	<select id="countAllFunc"  parameterType="String" resultType="int">
+		 select count(1)
+				from url a,
+				func_url b,
+				func ,
+				menu,
+				operate
+				
+				where 
+				a.id=b.urlid 
+				and func.funcid = b.funcid 
+				and func.menuid = menu.menuid
+				and func.operid = operate.operid
+				and menu.state = 1												
+							
+				<if test="menuid != null and menuid != ''">
+					and a.id = #{menuid} 
+				</if> 
+				<if test="menuitem != null and menuitem != ''">
+					and a.name  like concat(concat('%',#{menuitem}),'%')  
+				</if> 
+				<if test="url != null and url != ''">
+					and a.url  like concat(concat('%',#{url}),'%')  
+				</if> 
+				<if test="name != null and name != ''">
+					and menu.menuid = #{name} 
+				</if>
+	</select>
+	
+	<select id="querySysFuncList2" parameterType="String" resultType="com.zzx.pojo.SysFunc">
+	 	select t.urlid id from func_url t where t.funcid = #{funcid}
+	</select>
+	
+	<insert id="updateFunc" parameterType="com.zzx.pojo.SysFunc">
+       <if test="sysFunc != null and sysFunc.funcid!=null and sysFunc.funcid!=''">
+       		update func m 
+       			set m.menuid=#{sysFunc.sysMenu.menuid },
+       			m.operid=#{sysFunc.operid }
+       			where 	m.funcid=#{sysFunc.funcid}
+       </if>
+	</insert>
+	
+	<insert id="updateSys_url" parameterType="com.zzx.pojo.SysFunc">
+       <if test="sysFunc != null and sysFunc.sysUrl.id!=null and sysFunc.sysUrl.id!=''">
+       		update url m 
+       			set m.url=#{sysFunc.sysUrl.url :VARCHAR},  
+       				m.name=#{sysFunc.sysUrl.name }
+       			where 	m.id=#{sysFunc.sysUrl.id}
+       </if>
+	</insert>
+	
+	<select id="querySysFuncByUrl" parameterType="String" resultType="com.zzx.pojo.SysFunc">
+	 	select a.id id from url a where 1=1
+	   	and a.url = #{url}
+	</select>
+	
+		<!-- 保存一条数据，List传参 -->
+	<insert id="saveSys_url" parameterType="com.zzx.pojo.SysFunc">
+        insert into url
+          (id,
+           url,
+           name)
+        values
+          (#{sysFunc.sysUrl.id},
+           #{sysFunc.sysUrl.url :VARCHAR},
+           #{sysFunc.sysUrl.name :VARCHAR})
+	</insert>
+	
+	<insert id="saveSys_func"  parameterType="com.zzx.pojo.SysFunc">  
+        insert into func
+          (funcid,
+           menuid,
+           operid)
+        values
+          (#{sysFunc.funcid},
+           #{sysFunc.sysMenu.menuid :VARCHAR},
+           #{sysFunc.operid})
+	</insert>
+	
+	<insert id="saveSys_func_url"  parameterType="com.zzx.pojo.SysFunc">  
+        insert into func_url
+          (funcid,
+           urlid,
+           disable)
+        values
+          (#{sysFunc.funcid},
+           #{sysFunc.sysUrl.id :VARCHAR},
+           0)
+	</insert>
+	
+	<select id="countFromSys_role_funcByFuncid"  parameterType="String" resultType="int">
+		 select count(1) from role_func where funcid=#{funcid}
+	</select>
+	
+	<!-- 删除 func_url-->
+    <delete id="deleteSys_func_url" parameterType="String">
+        delete from func_url  where funcid=#{funcid}
+    </delete>
+    
+    <!-- 删除URL -->
+    <delete id="deleteSys_url" parameterType="String">
+        delete from url  where id=#{id}
+    </delete>
+    
+    <!-- 删除FUNC -->
+    <delete id="deleteSys_funcById" parameterType="String">
+        delete from func  where funcid=#{funcid}
+    </delete>
+    
+    <!-- 删除 ROLE_FUNC-->
+    <delete id="deleteSys_role_func" parameterType="String">
+        delete from role_func  where funcid=#{funcid}
+    </delete>
+    
+    <select id="findTopFunc" resultType="com.zzx.pojo.SysMenu">
+		select a.menuid,a.menuitem from MENU a where a.PARENTID!='' and a.state = 1 order by a.parentid,a.menuid
+	</select>
+	
+	<select id="findOprType" resultType="com.zzx.pojo.SysOperate">
+		select operid as operkey, opername from OPERATE t order by t.operid
+	</select>
+</mapper>

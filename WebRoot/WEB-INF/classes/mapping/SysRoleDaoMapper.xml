@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.zzx.backFunc.sysuser.role.dao.SysRoleDao">
+	<select id="querySysRoleList" resultType="com.zzx.pojo.SysRole">        
+		select * from role order by disable 
+	</select> 
+	
+	<select id="querySysRoleListByPage" resultType="com.zzx.pojo.SysRole">        
+		select roleid,rolename,disable,creator from role 
+			limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="countSysRole" resultType="int">        
+		select count(roleid) from role where 1=1  
+	</select>
+	
+	<update id="updateSysRole" parameterType="com.zzx.pojo.SysRole">
+		update role set rolename=#{rolename},disable=#{disable} where roleid = #{roleid}
+	</update>
+	
+	<select id="getSysRoleByRoleName" resultType="int">        
+		select count(rolename) from role where rolename=#{rolename}
+	</select>
+	
+	<insert id="saveSysRole">
+		insert into role (roleid,rolename,disable,creator) values (#{roleid},#{rolename},#{disable},#{creator})
+	</insert>
+	
+	<select id="countSysUser" resultType="int">        
+		select count(userid) from user where 1=1  
+		<if test="roleids != null">
+		    and userid in
+		    (
+				select userid from user_role 
+			    where 1&lt;&gt;1
+			    <foreach collection="roleids" item="roleid">
+					or roleid = #{roleid}
+				</foreach>
+			)
+		</if>
+		<if test="keyword != null">
+		and (userid like concat(concat('%',#{keyword}),'%')
+			or username like concat(concat('%',#{keyword}),'%')
+		) 
+		</if>
+	</select>
+	
+	<delete id="deleteSysFuncByRoleId">
+	    delete from role_func where roleid=#{roleId}
+	</delete>
+	
+	<delete id="deleteRoleByRoleId">
+	   delete from role where roleid=#{roleId}
+	</delete>
+	
+	<select id="getSysFuncIdListByRoleIds" resultType="String">        
+		select funcid from role_func 
+		<if test="roleids != null">
+		    where 1&lt;&gt;1 
+	   		<foreach collection="roleids" item="roleid">
+				or roleid = #{roleid}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="getMenuById" resultType="com.zzx.pojo.SysMenu">
+	    select * from menu where menuid=#{menuId}
+	</select>
+	
+	<select id="getSysFuncListByUserId" resultType="com.zzx.pojo.SysFunc">        
+		select distinct a.funcid,b.menuid menuid,menuitem,b.parentid parentid,b.sort,url.name opername from func a
+			join func_url on ( a.funcid = func_url.funcid)
+      		join url on (func_url.urlid = url.id)
+			join menu b on (a.menuid=b.menuid)
+			left join operate c on (a.operid=c.operid)
+			order by b.parentid,b.sort
+	</select>
+	
+	<insert id="saveSysFuncByRoleId">
+		insert into role_func (roleid,funcid) values(#{roleId},#{funcId})
+	</insert>
+	
+</mapper>

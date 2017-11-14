@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>盛峰网站后台管理系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="pragma" content="no-cache"> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+	<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+	<link rel="stylesheet" type="text/css" href="../../views/css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../views/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../views/css/common.css"> 
+	<script type="text/javascript" src="../../views/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../../views/js/jquery.form.js"></script>
+	<script type="text/javascript" src="../../views/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../views/js/blockUI.js"></script>
+	<script type="text/javascript" src="../../views/js/sysmsg.js"></script> 
+	<script type="text/javascript" src="../../views/js/uploadPreview.js"></script>
+	<script type="text/javascript" src="../../views/js/base-config.js"></script>
+	<script type="text/javascript" src="../../views/js/getPath.js"></script>
+	<script type="text/javascript" src="../../views/js/getImageInfo.js"></script>
+	<script type="text/javascript" src="livemanage.js"></script>
+</head>
+<body>	
+	<div class='topMask' style="width:100%;height:100%;text-align:center;background-color:white;position:absolute;top:0px;left:0px;z-index:9999999;">
+		<img style="width:80px;height:80px;" src="../../views/images/waiting.gif"/>
+	</div>
+	<table id="tbLive" data-options="fit:true">
+	</table>
+		<div id="tb">
+			<table style="width:904px;">
+				<tr>
+					<td style="width: 60px; ">内容查询</td>
+					<td style="width: 119px; "><input type="text" placeholder="" style="width:180px;" name="keyword" id="keyword"/></td>				 					 		 	
+					<td>
+						<button id="doSearch" type="button" value="查询" data-oper="query">查询</button>
+					</td>
+				</tr>		
+				<tr>
+					<td colspan="7">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add" data-oper="add" plain="true" id="addstaff" >新 增 </a>  
+						<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="Delete">删除</a>
+					</td>
+				</tr> 					 	
+			</table>
+		</div>
+	<div class="easyui-window" data-options="modal:true,closed:true,
+		resizable:false,
+		minimizable:false,
+		maximizable:false,
+		draggable:true,
+		collapsible:false"
+		id="addUserWin" name="addUserWin" style="width: 500px; height: 300px;">
+		<form id="uploadImgForm" name="uploadImgForm" method="post" enctype="multipart/form-data">
+			<div style="float: left; height: 200px; width: 200px; margin: 20px 0 0 20px; text-align: center;">
+				<div style="line-height: 35px;">
+					<div style="width: 250px; text-align: left; margin-top: 10px">
+						<span>直播内容:</span><textarea rows="5" cols="40" id="content" name="content"></textarea>
+					</div>
+					<span>股票状态:</span> 
+					<select name="liveState" id="liveState" class="easyui-combobox" panelHeight="auto">
+						<option value="0">默认</option>
+						<option value="1">置顶：红色</option>
+						<option value="2">置顶：蓝色</option>
+					</select>
+				</div>
+				<div style="width: 250px; text-align: left; margin-top: 10px">
+					<input type="button" id="btnSave" name="btnSave" value="保 存" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="btnCancel"
+						name="btnCancel" value="取 消" />
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

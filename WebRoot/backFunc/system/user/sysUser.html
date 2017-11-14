@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>biubiu后台管理系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="pragma" content="no-cache"> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+	<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+    <link rel="shortcut icon" href="views/images/logo@2x.png">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/common.css">
+	<link rel="stylesheet" type="text/css" href="sysUser.css">
+	<script type="text/javascript" src="../../../views/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../../../views/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../../views/js/blockUI.js"></script>
+	<script type="text/javascript" src="../../../views/js/sysmsg.js"></script> 
+	<script type="text/javascript" src="../../../views/js/base-config.js"></script>
+	<script type="text/javascript" src="../../../views/js/security.js"></script>
+	<!-- <script type="text/javascript" src="sysUser.js"></script> -->
+</head>
+<body >
+<!-- 	<div class="ctn_header">
+		<div class="ctn_header_title">管理员用户列表</div>
+		<div class="ctn_header_desc">
+				你可以查看所有后台管理员，并进行以下操作：<br/>
+				1、新增管理员并配置管理员角色类型<br/>
+				2、编辑现有管理员信息、更改管理员角色类型<br/>
+				3、为忘记密码的管理员进行重置密码操作<br/>
+		</div>
+	</div> -->
+	<div class="easyui-panel" data-options="fit:true">
+		<table id="tbsysuser" data-options="fit:true"> 
+		</table>
+		<div id="tb">
+			<table style="width:904px;">						
+					<tr>
+						
+						<td style="width: 38px; ">角色</td>
+						<td style="width: 76px; "><select id="rolesfilter" name="rolesfilter" class="easyui-combobox" style="width:280px;">
+							</select>
+						</td>				 					 		 	
+						
+						<td style="width: 98px; ">登录账户/用户名</td>
+						<td style="width: 119px; "><input type="text" placeholder="" style="width:180px;" name="keyword" id="keyword"/></td>				 					 		 	
+						<td>
+							<button id="doSearch" type="button" value="查询" data-oper="query">查询</button>
+						</td>
+					 </tr>		
+				 <tr>
+					<td colspan="7">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add" data-oper="add" plain="true" id="addNewUser"> 新 增 </a>  
+						<a href="#" class="easyui-linkbutton" iconCls="icon-edit" data-oper="modify" plain="true" id="editForm"> 编 辑 </a>  
+						<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" data-oper="forbidden" plain="true" id="delUser"> 禁 用 </a> -->
+						<a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="deleteUser"> 删除 </a>  
+						<a href="#" class="easyui-linkbutton" iconCls="icon-reload" data-oper="reset_pwd" plain="true" id="resetPwd"> 重置密码 </a>
+					</td>
+				</tr> 					 	
+			</table>
+		</div>
+
+	</div>
+	<div class="easyui-window addUserWin" 
+	data-options="modal:true,closed:true,
+		resizable:false,
+		minimizable:false,
+		maximizable:false,
+		draggable:true,
+		collapsible:false" id="addUserWin"
+		style="width:300px;height:300px;">
+		<form id="ff" name="ff" method="post">
+		<table >
+			<input type="hidden" id="orgcode" name="orgcode" />
+			<tr>
+				<th style="width:100px;">登录账户</th>
+				<td>
+					<input type="text" name="userid" id="userid" pass="0"
+						class="easyui-validatebox" data-options="required:true" validType="maxlength[20,10]"/>
+				</td>
+				<td><img id="checkIcon" src="" style="display: none;width:15px;height:15px"></td>
+			</tr>
+			<tr>
+				<th>用户名</th>
+				<td>
+					<input type="text" name="username" id="username" validtype="checkspecial"
+						class="easyui-validatebox" validtype="length[4,32]"  data-options="required:true"/>
+				</td>
+			</tr>
+			<tr>
+				<th>密码</th>
+				<td>
+					<input type="password"  id="password" name="password" value="" class="easyui-validatebox"  validtype="length[6,16]" data-options="required:true,validType:'pwd'"/>
+				</td>
+			</tr>
+			<tr>
+				<th>密码确认</th>
+				<td>
+					<input type="password" id="passwordcfm" name="passwordcfm" value="" class="easyui-validatebox"  validtype="length[6,16]" data-options="required:true" validType="equals['#password']"/>
+				</td>
+			</tr>
+			<tr>
+				<th>角色</th>
+				<td>
+					<div class="roleHolder1" >
+						<h6>加载中...</h6>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="hidden" id="id" name="id" value="0"/>					
+					<input type="button" id="btnSaveUser" name="btnSaveUser"
+					value=" 保 存 "/>
+					&nbsp;&nbsp;&nbsp;
+					<input type="button" id="btnCanceluser" name="btnCanceluser"
+					value=" 取 消 "/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+
+	<div class="easyui-window chgPwd" id="chgPwdWin" title="重置密码" data-options="closed:true,collapsible:false,minimizable:false,maximizable:false,modal:true" style="width:200px;height:200px;">
+		<div class="" style="margin:1px auto;">
+			<h3>设置新密码</h3>
+		</div>
+		<div style="margin:1px auto;">
+			<input type="password" size="20" name="newPwd" id="newPwd" class="easyui-validatebox"  data-options="required:true,validType:'pwd'"/>
+		</div>
+		<div style="margin-top:10px;" >
+			<input type="button" value="提  交" id="savepwd" name="savepwd"/>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/html" id="tmplMapRoleItem">
+	<div class="roleListItem">
+		<input type="checkbox" value="{roleid}" id="chkRole{roleid}" name="roleid" data-rid="{roleid}" />
+		<label for="chkRole{roleid}" >{rolename}</label>
+	</div>
+</script>
+
+<script type="text/javascript">
+	function init(){
+		$.getScript("sysUser.js");
+	}
+	setTimeout(init,200);    
+</script>

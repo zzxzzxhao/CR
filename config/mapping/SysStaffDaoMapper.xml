@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.backFunc.staffmanage.staff.dao.SysStaffDao">
+	<select id="getStaffList" resultType="com.zzx.pojo.SysStaff">        
+		select * from staff
+			<if test="keyword != null and keyword != ''">
+	   			and staff.staffname  like concat(concat('%',#{keyword}),'%')  
+	   		</if>
+			limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="count" resultType="int">        
+		select count(staffid) from staff  
+	</select>
+	
+	<select id="getStaffByName" resultType="int">
+		select count(staffname) from staff where staffname=#{staffname}
+	</select>
+	
+	<insert id="saveStaff">
+		insert into staff (staffname) values (#{staffname})
+	</insert>
+	
+	<update id="updateStaff" parameterType="com.zzx.pojo.SysStaff">
+		update staff set 
+			staffname=#{staffname}
+			<if test="url !=null and url !=''">
+			,url=#{url}
+			</if>
+		where staffid = #{staffid}
+	</update>
+	
+	<delete id="deleteStaffById">
+	   delete from staff where staffid=#{staffid}
+	</delete>
+	
+</mapper>

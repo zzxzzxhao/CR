@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>biubiu后台管理系统</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="pragma" content="no-cache"> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+	<meta http-equiv="expires" content="Wed, 26 Feb 1970 08:21:57 GMT">
+    <link rel="shortcut icon" href="views/images/logo@2x.png">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../../views/css/common.css"> 
+	<script type="text/javascript" src="../../../views/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="../../../views/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../../../views/js/blockUI.js"></script>
+	<script type="text/javascript" src="../../../views/js/sysmsg.js"></script> 
+</head>
+<body>
+	<div class="easyui-panel" data-options="fit:true">
+		<table id="tbMenuList" data-options="fit:true">
+	    	</table>
+		<div>
+	    	  <div id="tb">
+				<table style="width:904px;">						
+					<tr>
+						
+						<td>功能名称</td>
+						<td><input type="text" placeholder="" name="menuitem" id="menuitem"  style="width:180px;"/></td>				 					 		 	
+						
+						<td>功能URL</td>
+						<td><input type="text" placeholder="" name="url" id="menuUrl"  style="width:180px;"/></td>				 					 		 	
+						
+						<td>功能所属菜单 </td>
+						<td>
+							<select id="funandmenu" name=funandmenu  style="width: 180px;">
+						
+							</select>
+						</td>						 					 		 	
+						<td>
+							<button id="search" type="button" value="查询" data-oper="query">查询</button>
+						</td>
+					 </tr>		
+				 <tr>
+					<td colspan="7">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add" data-oper="add" plain="true" id="add"> 新 增 </a>  
+						<a href="#" class="easyui-linkbutton" iconCls="icon-edit" data-oper="modify" plain="true" id="edit"> 编 辑 </a>
+						 <a href="#" class="easyui-linkbutton" iconCls="icon-remove" data-oper="delete" plain="true" id="del"> 删除</a>  
+					</td>
+				</tr> 					 	
+				</table>
+			</div>
+		</div>		
+	</div>
+	<div class="easyui-window addWin" 
+	data-options="modal:true,closed:true,
+		resizable:false,
+		minimizable:false,
+		maximizable:false,
+		draggable:true,
+		collapsible:false" id="addWin"
+		style="width: 561px;height:300px;text-align:center;vertical-align:middle">
+		<form id="menuForm" name="menuForm" method="post" ENCTYPE="multipart/form-data" style="width: 511px; ">
+
+		<table id="tb_sysFunc" style="width: 60%;margin:auto">
+			<input type="hidden" id="id" name="id" />
+			<input type="hidden" id="menuid" name="menuid" />	
+			<input type="hidden" id="operid" name="operid" />	
+			<input type="hidden" id="funcid" name="funcid" />
+							
+			<tr>
+				<th style="width: 40%;">功能名称：</th>
+				<td style="width: 60%;">
+					<input type="text" style="width: 180px;" name="funName" id="menuitem_form"
+						class="easyui-validatebox" data-options="required:true,validType:'maxlength[1,200]'" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,''))" maxlength=20/>
+				</td>
+							
+			</tr>	
+			<tr>
+				<th style="width: 40%;">功能请求地址 ：</th>
+				<td style="width: 60%;">
+					<input type="text" style="width: 180px;" name="url" id="url_form" 
+						class="easyui-validatebox" data-options="required:true,validType:'maxlength[1,300]'" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\/\.\=\?\\]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-\z\A-\Z0-9\/\.\=\?\\]/g,''))" maxlength=100/>
+				</td>
+			</tr>					
+			<tr>
+				<th>功能所属菜单</th>
+				<td>
+					<select id="parentid_form" name="selectmenuid"  data-options="required:true" style="width: 180px;">
+						
+					</select>
+				</td>
+			</tr>				
+			<tr>
+				<th>功能操作类型</th>
+				<td>
+					<select id="oprname_form" name="oprId"  data-options="required:true" style="width: 180px;">
+						
+					</select>
+				</td>
+			</tr>
+													
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" id="btnSave" name="btnSave"
+					value=" 保 存 "/>
+					&nbsp;&nbsp;&nbsp;
+					<input type="button" id="btnCancel" name="btnCancel"
+					value=" 取 消 "/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>	
+</body>
+</html>
+
+<script type="text/javascript" src="../../../views/js/base-config.js"></script>
+<script type="text/javascript">
+	(function() {
+		$.getScript("sysFunc.js");
+	})();
+</script>

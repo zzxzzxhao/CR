@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:cache="http://www.springframework.org/schema/cache"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:jms="http://www.springframework.org/schema/jms" 
+		xmlns:lang="http://www.springframework.org/schema/lang"
+		xmlns:mvc="http://www.springframework.org/schema/mvc" 
+		xmlns:oxm="http://www.springframework.org/schema/oxm"
+		xmlns:p="http://www.springframework.org/schema/p" 
+		xmlns:task="http://www.springframework.org/schema/task"
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:util="http://www.springframework.org/schema/util"
+	
+	    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd    
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd    
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd    
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd    
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd    
+        http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.2.xsd    
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.2.xsd    
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd    
+        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.2.xsd    
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd    
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd    
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd"
+	    default-autowire="byName">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:spring/jdbc.properties" />
+	</bean>
+	
+	
+		<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	  <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	  <!-- <property name="driverClassName" value="${jdbc.driverClass}" />-->
+	    <!-- 基本属性 url、user、password -->
+	    <property name="url" value="${jdbc.jdbcUrl}"/>
+	    <property name="username" value="${jdbc.user}" />
+	    <property name="password" value="${jdbc.password}" />
+	 
+	    <!-- 配置初始化大小、最小、最大 -->
+	    <property name="initialSize" value="3" />
+	    <property name="minIdle" value="3" />
+	    <property name="maxActive" value="20" />
+	 
+	    <!-- 配置获取连接等待超时的时间 -->
+	    <property name="maxWait" value="60000" />
+	 
+	    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+	    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+	 
+	    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+	    <property name="minEvictableIdleTimeMillis" value="300000" />
+	 
+	    <property name="validationQuery" value="SELECT 'x'" />
+	    <property name="testWhileIdle" value="true" />
+	    <property name="testOnBorrow" value="false" />
+	    <property name="testOnReturn" value="false" />
+	 
+	    <!-- 配置监控统计拦截的filters -->
+	  <property name="filters" value="stat" />
+	</bean>
+	<!-- 声明事务 --> 
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/> 
+	
+	<tx:advice id="txAdvice"  transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="create*" propagation="REQUIRED"/>
+			<tx:method name="modify*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="remove*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="set*" propagation="REQUIRED"/>
+			<tx:method name="login*" propagation="REQUIRED"/>
+			<tx:method name="sort*" read-only="true"/>
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="txPointcut"
+			expression="execution(* com.zzx.backFunc.*.*.service.*Service.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
+	
+	<context:component-scan base-package="com.zzx">  
+    <!--将Controller的注解排除掉 -->   
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />  
+	</context:component-scan> 
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:mapping/*Mapper.xml"/>  
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>   
+        <property name="maxUploadSize" value="10485760000"></property>  
+        <property name="maxInMemorySize" value="40960"></property>  
+   </bean>  		
+
+	<!-- 系统用户登陆模块定义 -->
+	<bean id="sysUserDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.sysuser.control.dao.SysUserDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="sysUserService" class="com.zzx.backFunc.sysuser.control.service.impl.SysUserServiceImpl">
+		<property name="sysUserDao" ref="sysUserDao"></property>
+	</bean>
+	
+	<!-- 菜单管理 -->
+	<bean id="sysMenuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.sysuser.menu.dao.SysMenuDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 角色管理 -->
+	<bean id="sysRoleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.sysuser.role.dao.SysRoleDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="sysRoleService" class="com.zzx.backFunc.sysuser.role.service.impl.SysRoleServiceImpl">
+		<property name="sysRoleDao" ref="sysRoleDao"></property>
+	</bean>
+
+	<!-- 股票首页管理 -->
+	<bean id="sysStockIndexDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.test.stockindex.dao.SysStockIndexDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 股票详情-->
+	<bean id="sysStockMoreDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.test.stockmore.dao.SysStockMoreDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 第二版草根达人管理 -->
+	<bean id="sysStockSecondDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.Home.stock.second.dao.SysStockSecondDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 股票直播-->
+	<bean id="sysStockLiveDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.Home.live.dao.SysStockLiveDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 直播内容保存-->
+	<bean id="sysStockLiveMessageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.live.message.dao.SysStockLiveMessageDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 问答保存-->
+	<bean id="sysStockLiveAskDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.Home.liveask.dao.SysStockLiveAskDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 直播问答内容保存-->
+	<bean id="sysStockLiveAskMessageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.live.ask.message.dao.SysStockLiveAskMessageDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 业务员管理-->
+	<bean id="sysStaffDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.staffmanage.staff.dao.SysStaffDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 草根达人股票管理-->
+	<bean id="sysStockDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.staffmanage.stock.dao.SysStockDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 草根达人股票详情管理-->
+	<bean id="sysStockDetailDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.Home.stock.detail.dao.SysStockDetailDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 视频直播用户管理-->
+	<bean id="sysLiveIndexDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.Live.index.dao.SysLiveIndexDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	
+	<!-- yy直播用户管理-->
+	<bean id="sysYYLiveManageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zzx.backFunc.yylive.control.dao.SysYYLiveManageDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+</beans>

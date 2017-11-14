@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.test.stockindex.dao.SysStockIndexDao">
+	<select id="getList" resultType="com.zzx.pojo.SysStock">
+		select * from stock order by id
+	</select>
+	
+	<update id="savenum" parameterType="com.zzx.pojo.SysStock">
+		update stock set num=#{num} where code = #{code}
+	</update>
+</mapper>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="300">
+    <title>通宝学府</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../views/css/amazeui.min.css">
+	<style type="text/css">
+		dt{
+			float: left;
+			padding-left: 7%;
+		}
+		#tongtitle{
+			position: absolute;
+			top: 18%;
+			padding-left: 7%;
+		}
+		/* .bd_img{
+			background: #191919;
+			opacity: 0.8;
+			display: none;
+			position: fixed;
+			left: 10%;
+			top: 10%;
+		} */
+		/* .img{
+			display: none;
+			position:fixed;
+			top:20%;
+			left:18%;
+			width:62%;
+		} */
+	</style>
+</head>
+<body>
+<header data-am-widget="header" class="am-header am-header-default" style="height: 88px;">
+    <a href="#title-link" style="color: #fff;font-size: 40px;" id="tongtitle">通宝学府</a>
+</header>
+<section class="am-panel am-panel-default" style="background: #f7f7f7;margin-bottom: 0px;">
+	<article class="am-article" style="background: white;height: 185px">
+		<dl style="margin-top: 25px">
+			<dt style="font-size: 35px;">坐堂专家:</dt>
+			<dd>
+				<span>
+					<a href="" style="font-size: 35px;color: #333">&nbsp;&nbsp;特约专家&nbsp;&nbsp;李通宝</a>
+				</span>
+			</dd>
+		</dl>
+		<dl>
+			<dt style="font-size: 35px">股市直播:</dt>
+			<dd>
+				<span>
+					<a href="" style="font-size: 35px;padding-left: 18px;color: #333" id="livetime"></a>
+				</span>
+			</dd>
+		</dl>
+	</article>
+</section>
+<section class="am-panel am-panel-default" style="background: #f7f7f7;margin-bottom: 0px;">
+	<ul class="am-nav am-nav-pills am-nav-justify" style="font-size: 33px">
+  		<li><a href="../live/live.html">直播</a></li>
+  		<li class="am-active"><a href="#">问答</a></li>
+	</ul>
+</section>
+<section class="am-panel am-panel-default" style="background: #f7f7f7;margin-bottom: 0px;">
+	<form class="am-form" style="margin-top: 20px;margin-bottom: 105px;">
+		<div class="am-comment-main" style="margin-right: 63px;">
+     	 <textarea class="" rows="5"  id="askcontent" placeholder="把你想和专家说的话写出来吧！！" style="font-size: 22px"></textarea>
+     	<!--  <button class="am-btn am-btn-default" id="sub" style="position:relative;float: right;margin-top: 10px;font-size: 22px">提问</button> -->
+   	 	<a type="button" class="am-btn am-btn-danger" onclick="ask()"style="position:relative;float: right;margin-top: 10px;font-size: 33px">提问</a>
+   	 </div>
+</form>
+</section>
+<section class="am-panel am-panel-default"style="background: #f7f7f7;">
+	<ul class="am-comments-list am-comments-list-flip content" style="font-size: 33px">
+		<li class='am-comment'>
+		</li>		
+	</ul>
+	<!-- <img class="img" src="../../views/images/erweima.jpg"> -->
+</section>
+<script src="../../views/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../views/js/base-config.js"></script>
+<script type="text/javascript" src="ask.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+package com.zzx.Live.index.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.zzx.pojo.SysLiveUser;
+
+/**
+* @author 郑志欣
+* @date 2017年9月15日
+*/
+public interface SysLiveIndexDao {
+	public int count(@Param("account")String account,@Param("password")String password);
+
+	public int countNum(@Param("account")String account);
+
+	public int countName(@Param("name")String name);
+
+	public int getDisable(@Param("account")String account);
+	
+	public void reg(@Param("name")String name,@Param("account")String account,@Param("password")String password,@Param("userid")String userid);
+	
+	public String getName(@Param("account")String account);
+
+	public int check(@Param("account")String account);
+
+	public void setExpireTime(@Param("account")String account,@Param("setTime")long setTime);
+
+	public long getExpireTime(@Param("account")String account);
+
+	public void setLoginState(@Param("account")String account);
+
+	public void logout(@Param("account")String account);
+	
+	public List<SysLiveUser> getonlineuser();
+
+	public String getAddress();
+}

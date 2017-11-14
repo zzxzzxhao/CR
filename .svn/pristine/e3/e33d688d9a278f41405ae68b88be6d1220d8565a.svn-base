@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//WebRoot/Home/stockmore/demo.css=UTF-8
+encoding//WebRoot/Home/testindex/demo.css=UTF-8
+encoding//WebRoot/views/css/common.css=UTF-8
+encoding//WebRoot/views/css/easyui.css=UTF-8
+encoding//WebRoot/views/js/sysmsg.js=UTF-8
+encoding//config/config.properties=UTF-8
+encoding//src/com/zzx/sys/control/PropsUtil.java=UTF-8
+encoding//src/com/zzx/sys/control/Result.java=UTF-8
+encoding//src/com/zzx/sys/control/filter/IllegalCharacterFilter.java=UTF-8
+encoding//src/com/zzx/sys/control/filter/RequestRegex.java=UTF-8
+encoding//src/com/zzx/sys/control/util/MyException.java=UTF-8
+encoding/<project>=UTF-8

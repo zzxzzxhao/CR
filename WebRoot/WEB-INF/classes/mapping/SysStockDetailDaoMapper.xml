@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.Home.stock.detail.dao.SysStockDetailDao">
+	<select id="getStockDate" resultType="com.zzx.pojo.SysStock">
+		select * from stocklist where staffid = #{staffid}
+	</select>
+	
+	<select id="getStaff" resultType="com.zzx.pojo.SysStaff">
+		select * from staff where staffid = #{staffid}
+	</select>
+	
+	<update id="savePraise">
+		update staff set praisenum=#{num} where staffid=#{staffid}
+	</update>
+</mapper>

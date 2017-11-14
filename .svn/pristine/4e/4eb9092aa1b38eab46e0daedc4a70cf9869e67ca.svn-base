@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzx.backFunc.sysuser.control.dao.SysUserDao">
+	<select id="getSysUserById" resultType="com.zzx.pojo.SysUser">
+		select * from user where
+		userid=#{userId}
+	</select>
+
+	<select id="querySysRoleListByUserId" resultType="com.zzx.pojo.SysRole">
+		select * from role where roleid in(
+			select roleid from user_role 
+				where userid=#{userId})
+	</select>
+	
+	<update id="updateSysUser" parameterType="com.zzx.pojo.SysUser">
+		update user set 
+			username=#{username}
+			<if test="password !=null and password !=''">
+			 ,password=#{password}
+			</if>
+			<if test="peopleState !=null and peopleState !=''">
+			,peopleState=#{peopleState}
+			</if>
+			<if test="passwordErrCount !=null">
+			,passwordErrCount=#{passwordErrCount}
+			</if>
+			,disable=#{disable} 
+		where userid = #{userid}
+	</update>
+	
+	<select id="getMenuByUserId" resultType="com.zzx.pojo.SysMenu">
+	    select distinct a.* from menu a
+			join  func b on (b.menuid=a.menuid)
+			join  role_func c on(c.funcid=b.funcid)
+			join  user_role d on(d.roleid=c.roleid)
+			join  role e on(e.roleid=d.roleid) where e.disable=0
+			and a.state = 1
+			<if test="userId !='admin'">
+				 and d.userid=#{userId}
+			</if>
+			order by a.sort
+	</select>
+	
+	<select id="getMenuById" resultType="com.zzx.pojo.SysMenu">
+	    select * from menu where menuid=#{menuId} order by menu.sort
+	</select>
+	
+	<select id="querySysUserList" resultType="com.zzx.pojo.SysUser">        
+		select userid,username,disable from user where 1 = 1
+			<if test="roleids != null">
+			    and userid in
+			    (
+					select userid from user_role 
+				    where 1&lt;&gt;1
+				    <foreach collection="roleids" item="roleid">
+						or roleid = #{roleid}
+					</foreach>
+				)
+			</if>
+					
+			<if test="keyword != null">
+			and (userid like concat(concat('%',#{keyword}),'%')
+				or username like concat(concat('%',#{keyword}),'%')
+			) 
+			</if>
+			limit #{start_number},#{page_size}
+	</select>
+	
+	<select id="countSysUser" resultType="int">        
+		select count(userid) from user where 1=1  
+		<if test="roleids != null">
+		    and userid in
+		    (
+				select userid from user_role 
+			    where 1&lt;&gt;1
+			    <foreach collection="roleids" item="roleid">
+					or roleid = #{roleid}
+				</foreach>
+			)
+		</if>
+		<if test="keyword != null">
+		and (userid like concat(concat('%',#{keyword}),'%')
+			or username like concat(concat('%',#{keyword}),'%')
+		) 
+		</if>
+	</select>
+	
+	<insert id="saveSysUser" parameterType="com.zzx.pojo.SysUser">
+		insert into user (
+			userid,
+			username,
+			password,
+			peopleState
+		) 
+		values(
+			#{userid},
+			#{username},
+			#{password},
+			#{peopleState}
+		)
+	</insert>
+	
+	<delete id="deleteSysRolesByUserId">
+	    delete from user_role where userid=#{userId}
+	</delete>
+	
+	<insert id="saveSysRoleByUserId">
+		insert into user_role (userid,roleid) values(#{userId},#{roleId})
+	</insert>
+	
+	<select id="querySysRoleList" resultType="com.zzx.pojo.SysRole">        
+		select * from role order by disable 
+	</select>
+	
+	<delete id="deleteUserByUserId">
+	    delete from user where userid=#{userId}
+	</delete>
+</mapper>

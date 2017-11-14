@@ -1,0 +1,26 @@
+package com.zzx.backFunc.yylive.control.dao;
+/**
+* @author 郑志欣
+* @date 2017年9月19日
+*/
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.zzx.pojo.SysYYLiveUser;
+
+public interface SysYYLiveManageDao {
+	public List<SysYYLiveUser> getLiveUser(@Param("start_number")int start_number,@Param("page_size")int page_size,@Param("keyword")String keyword);
+
+	public int count();
+	
+	public void delete(@Param("id")String id);
+	
+	public void saveEnable(@Param("account")String account);
+
+	public void saveDisable(@Param("account")String account);
+
+	public void updatePassword(@Param("account")String account,@Param("password")String password);
+	
+}

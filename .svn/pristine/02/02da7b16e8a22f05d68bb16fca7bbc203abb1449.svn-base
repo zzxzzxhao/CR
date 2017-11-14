@@ -1,0 +1,139 @@
+body {
+	background: url(../../images/001.jpeg);
+	position: relative;
+}
+.title{
+    margin-left: 426px;
+    margin-top: 50px;
+}
+.titlename{
+	color: #f57102;
+	font-size: 30px;
+	margin-left: 350px;
+}
+.login_area {
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 800px;
+	height: 400px;
+	margin: auto;
+	background-color:#7b759e;
+	position: absolute;
+	text-align: center;
+	margin-left: 100px;
+}
+
+.inputText {
+	width: 315px;
+	border-color: blue;
+	border-radius: 0 15px 15px 0;
+}
+
+.form_bottom {
+	height: 40px;
+	width: 344px;
+	margin: 0 auto;
+	text-align: left;
+	display: inline-block;
+	line-height: 40px;
+}
+
+.rememberme_word {
+	position: absolute;
+	left: 110px;
+	top: 10px;
+}
+
+.btn {
+	border: 0px;
+	width: 117px;
+	height: 117px;
+}
+
+.submit {
+	height: 38px;
+	width: 344px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.loginbtn {
+	position: absolute;
+	left: 89px;
+	top: 40px;
+	background: url(../../images/login-submit.png) no-repeat;
+}
+
+.box {
+	height: 38px;
+	width: 344px;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 5%;
+	text-align: left;
+}
+
+#userid {
+	height: 90%;
+	width: 100%;
+	position: relative;
+	background-color: transparent;
+	text-align: center;
+	background-image: url('../../images/User.png');
+	background-repeat: no-repeat;
+	background-position-x: 5%;
+	background-position-y: 50%;
+}
+
+#password {
+	height: 90%;
+	width: 100%;
+	position: relative;
+	background-color: transparent;
+	color: #ffffff;
+	text-align: center;
+	background-image: url('../../images/Locked.png');
+	background-repeat: no-repeat;
+	background-position-x: 5%;
+	background-position-y: 50%;
+}
+
+.form_bottom {
+	position: relative;
+	background: url(images/login-bottom.png) no-repeat;
+	width: 470px;
+	height: 104px;
+}
+
+.verifyimg {
+	width: 100px;
+	height: 36px;
+	left: 170px;
+	position: absolute;
+}
+
+.imgcode {
+	height: 36px;
+	width: 150px;
+	border: 0px;
+	border: 1px #616A76 solid;
+	text-align: center;
+}
+
+.verify_area {
+	height: 38px;
+	width: 344px;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 5%;
+	text-align: left;
+}
+
+.tip {
+	position: relative;
+	cursor: pointer;
+	float: right;
+	line-height: 35px;
+	color: #fafafa;
+}
